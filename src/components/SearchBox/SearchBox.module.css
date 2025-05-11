@@ -1,0 +1,31 @@
+.search_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  margin-inline: auto;
+  margin-bottom: 2rem;
+  width: 30rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.search_item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 14rem;
+}
+
+.search_input {
+  border-radius: var(--radius);
+  border: none;
+  padding: 0.25rem 0.5rem;
+
+  &::placeholder {
+    color: var(--color-border);
+    font-size: 0.8rem;
+  }
+}

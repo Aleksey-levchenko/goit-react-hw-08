@@ -1,0 +1,64 @@
+.form {
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem;
+  margin: 2rem auto;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.form_item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  position: relative;
+}
+
+.field {
+  border-radius: var(--radius);
+  border: none;
+  padding: 0.25rem 0.5rem;
+
+  &::placeholder {
+    color: var(--color-border);
+    font-size: 0.8rem;
+  }
+}
+
+.error {
+  position: absolute;
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  top: 0.25rem;
+  right: 0.25rem;
+}
+
+.btn {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover {
+    background-color: var(--color-primary-light);
+    transform: scale(1.02);
+  }
+  &:active {
+    background-color: var(--color-primary-dark);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}

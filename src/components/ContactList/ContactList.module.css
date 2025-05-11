@@ -1,0 +1,21 @@
+.contact_container {
+  padding-inline: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contact_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc((100% - 3rem) / 4);
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.2);
+  }
+}

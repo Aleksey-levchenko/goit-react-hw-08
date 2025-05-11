@@ -1,0 +1,9 @@
+.nav_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  /* background-color: var(--color-bg-header); */
+  background-color: rgb(25, 118, 210);
+  border-bottom: 2px solid black;
+}
