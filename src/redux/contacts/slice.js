@@ -1,5 +1,10 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { addContact, deleteContact, fetchContacts } from './operations';
+import {
+  addContact,
+  deleteContact,
+  fetchContacts,
+  updateContact,
+} from './operations';
 import { logout } from '../auth/operations';
 
 const initialState = {
@@ -14,51 +19,75 @@ const slice = createSlice({
 
   extraReducers: builder => {
     builder
+      // Получение всех контактов
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
-
         state.contacts = action.payload;
       })
-      .addCase(logout.fulfilled, state => {
-        state.contacts = [];
-        state.isLoading = false;
-      })
+
+      // Добавление нового контакта
       .addCase(addContact.fulfilled, (state, action) => {
         state.contacts.push(action.payload);
       })
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        state.loading = false;
 
+      // Удаление контакта
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.contacts = state.contacts.filter(
           contact => contact.id !== action.payload,
         );
       })
+
+      // 🔄 Обновление контакта
+      .addCase(updateContact.fulfilled, (state, action) => {
+        const index = state.contacts.findIndex(
+          contact => contact.id === action.payload.id,
+        );
+        if (index !== -1) {
+          state.contacts[index] = action.payload;
+        }
+      })
+
+      // Очистка при выходе
+      .addCase(logout.fulfilled, state => {
+        state.contacts = [];
+        state.isLoading = false;
+      })
+
+      // Обработка загрузки
       .addMatcher(
         isAnyOf(
           fetchContacts.pending,
           addContact.pending,
           deleteContact.pending,
+          updateContact.pending,
         ),
         state => {
           state.error = null;
           state.isLoading = true;
         },
       )
+
+      // Завершение загрузки
       .addMatcher(
         isAnyOf(
           fetchContacts.fulfilled,
           addContact.fulfilled,
           deleteContact.fulfilled,
+          updateContact.fulfilled,
         ),
         state => {
           state.isLoading = false;
         },
       )
+
+      // Обработка ошибок
       .addMatcher(
         isAnyOf(
           fetchContacts.rejected,
           addContact.rejected,
           deleteContact.rejected,
+          updateContact.rejected,
         ),
         (state, action) => {
           state.isLoading = false;
